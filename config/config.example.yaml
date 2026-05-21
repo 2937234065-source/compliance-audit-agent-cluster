@@ -1,0 +1,25 @@
+# DeepSeek API配置
+deepseek:
+  api_key: "YOUR_DEEPSEEK_API_KEY"
+  base_url: "https://api.deepseek.com/v1"
+  model: "deepseek-chat"
+  temperature: 0.1
+  max_tokens: 4096
+
+# Agent配置
+agents:
+  data_parser_agent:
+    name: "数据解析专家"
+    system_message: "你是专业的数据解析专家，负责将非结构化的合同、发票、银行流水等数据转换为结构化格式。请严格按照JSON格式输出结果。"
+  
+  risk_mining_agent:
+    name: "风险挖掘专家"
+    system_message: "你是资深的财务审计专家，擅长发现交易中的异常和舞弊行为。请使用思维链推理，从单条数据异常反向推导完整交易链路。"
+
+# 数据库配置（示例）
+database:
+  host: "localhost"
+  port: 5432
+  user: "audit_user"
+  password: "audit_password"
+  database: "compliance_audit"

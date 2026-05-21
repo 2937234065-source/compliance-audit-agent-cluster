@@ -1,0 +1,24 @@
+from openai import OpenAI
+import yaml
+import os
+
+class DeepSeekClient:
+    def __init__(self, config_path="config/config.yaml"):
+        with open(config_path, 'r') as f:
+            self.config = yaml.safe_load(f)
+        
+        self.client = OpenAI(
+            api_key=self.config['deepseek']['api_key'],
+            base_url=self.config['deepseek']['base_url']
+        )
+        self.model = self.config['deepseek']['model']
+    
+    def chat_completion(self, messages, temperature=None, max_tokens=None):
+        """调用DeepSeek聊天接口"""
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=messages,
+            temperature=temperature or self.config['deepseek']['temperature'],
+            max_tokens=max_tokens or self.config['deepseek']['max_tokens']
+        )
+        return response.choices[0].message.content
